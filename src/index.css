@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+/* --- tus estilos después de Tailwind --- */
+:root{
+  --bg:#fff; --fg:#111; --link:#0645ad;
+  --text-size:1rem; --line-height:1.6; --letter-spacing:0;
+}
+html{ scroll-behavior:smooth; }
+body{
+  background:var(--bg); color:var(--fg);
+  font-size:var(--text-size); line-height:var(--line-height); letter-spacing:var(--letter-spacing);
+}
+a{ color:var(--link); text-decoration:underline; }
+:focus-visible{ outline:4px solid currentColor; outline-offset:4px; }
+
+html.a11y-dark{ --bg:#0b0b0b; --fg:#f6f6f6; --link:#9bb7ff; }
+html.a11y-contrast{ --bg:#000; --fg:#fff; --link:#0ff; }
+
+html.a11y-large-targets button,
+html.a11y-large-targets a,
+html.a11y-large-targets input[type="checkbox"],
+html.a11y-large-targets input[type="radio"]{
+  min-width:44px; min-height:44px;
+}
+
+html.a11y-underline a{ text-decoration:underline !important; }
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
+}
+html.a11y-reduce-motion *{
+  animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;
+}
