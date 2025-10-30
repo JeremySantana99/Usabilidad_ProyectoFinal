@@ -70,7 +70,13 @@ const defaults: Omit<
 
 export const useA11y = create<AccessibilityState>((set, get) => ({
   ...defaults,
-  toggle: (key) => set({ [key]: !get()[key] } as any),
+  toggle: (key) => {
+    // Si estamos desactivando el TTS, asegurarse de cancelar cualquier síntesis de voz
+    if (key === 'ttsEnabled' && get().ttsEnabled) {
+      globalThis.speechSynthesis?.cancel();
+    }
+    set({ [key]: !get()[key] } as any);
+  },
   set: (k, v) => set({ [k]: v } as any),
   openDrawer: () => set({ isDrawerOpen: true }),
   closeDrawer: () => set({ isDrawerOpen: false }),

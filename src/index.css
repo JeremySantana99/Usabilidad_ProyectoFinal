@@ -2,7 +2,7 @@
 
 /* --- tus estilos después de Tailwind --- */
 :root{
-  --bg:#fff; --fg:#111; --link:#0645ad;
+  --bg:#fff; --fg:#111; --link:#111;
   --text-size:1rem; --line-height:1.6; --letter-spacing:0;
 }
 html{ scroll-behavior:smooth; }
@@ -31,3 +31,8 @@ html.a11y-underline a{ text-decoration:underline !important; }
 html.a11y-reduce-motion *{
   animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;
 }
+html.a11y-kbd .force-outline, html.a11y-kbd :focus-visible{
+  outline: 4px solid #fff !important; /* azul */
+  outline-offset: 3px !important;
+}
+

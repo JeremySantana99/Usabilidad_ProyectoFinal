@@ -1,42 +1,48 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AccessibilityEngine from "./a11y/AccessibilityEngine";
+import GlobalMediaController from "./a11y/GlobalMediaController";
 import AccessibilityButton from "./a11y/AccessibilityButton";
 import AccessibilityDrawer from "./a11y/AccessibilityDrawer";
-import Header from "./components/Header";
-import Card from "./components/Card";
-import { demoPlaces } from "./data/demo";
+import TTSNarrator from "./a11y/TTSNarrator";
+import Layout from "./components/Layout";
+import Home from "./pages/Home";
+import Destinos from "./pages/Destinos";
+
+// Páginas placeholder (si luego creas archivos, reemplázalas en el router)
+function Rutas()   { return <h1 className="text-2xl font-bold">Rutas</h1>; }
+function Eventos() { return <h1 className="text-2xl font-bold">Eventos</h1>; }
+function Accesible(){ return <h1 className="text-2xl font-bold">Guía de accesibilidad</h1>; }
+
+// Router con tu Layout y páginas
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
+        { index: true, element: <Home /> },
+        { path: "destinos", element: <Destinos /> },
+        { path: "rutas", element: <Rutas /> },
+        { path: "eventos", element: <Eventos /> },
+        { path: "accesible", element: <Accesible /> },
+      ],
+    },
+  ],
+  // Si después usas hash router o basename, lo ajustas aquí
+);
 
 export default function App() {
   return (
     <>
+      {/* Aplica preferencias, atajos y políticas de medios a TODA la app */}
       <AccessibilityEngine />
+      <GlobalMediaController />
+      <TTSNarrator />
 
-      <Header />
+      {/* Tu aplicación navegable */}
+      <RouterProvider router={router} />
 
-      <main id="main" className="max-w-5xl mx-auto px-4 py-8 space-y-6">
-        <h1 className="text-2xl font-bold">Bienvenido</h1>
-        <p>
-          Usa el botón <span aria-label="símbolo de accesibilidad" role="img">♿</span> o el atajo <kbd>Alt</kbd>+<kbd>A</kbd> para abrir el menú.
-          Prueba a aumentar el texto (<kbd>Alt</kbd>+<kbd>=</kbd>), activar modo oscuro (<kbd>Alt</kbd>+<kbd>D</kbd>) o el lector (<kbd>Alt</kbd>+<kbd>R</kbd>).
-        </p>
-
-        <section aria-labelledby="lugares">
-          <h2 id="lugares" className="text-xl font-semibold mb-2">Lugares destacados</h2>
-          <div className="grid sm:grid-cols-2 gap-4">
-            {demoPlaces.map(p => <Card key={p.title} {...p} />)}
-          </div>
-        </section>
-
-        <section aria-labelledby="accesibilidad-info">
-          <h2 id="accesibilidad-info" className="text-xl font-semibold mt-8 mb-2">Accesibilidad del sitio</h2>
-          <ul className="list-disc pl-6 space-y-1">
-            <li>Opciones para usuarios con discapacidad auditiva, visual y motriz (según plantilla y WCAG 2.2). :contentReference[oaicite:1]&#123;index=1&#125;</li>
-            <li>Controles de contraste, tamaño de texto, espaciados y reducción de movimiento.</li>
-            <li>Lector de texto (TTS) y comandos de voz básicos.</li>
-            <li>Objetivos táctiles grandes, enlaces resaltados y navegación por teclado.</li>
-          </ul>
-        </section>
-      </main>
-
+      {/* Botón ♿ flotante + Drawer accesible (persisten entre páginas) */}
       <AccessibilityButton />
       <AccessibilityDrawer />
     </>

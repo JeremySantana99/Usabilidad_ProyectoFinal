@@ -13,13 +13,14 @@ export default function AccessibilityEngine() {
     html.classList.toggle("a11y-underline", s.underlineLinks);
     html.classList.toggle("a11y-large-targets", s.largeTargets);
     html.classList.toggle("a11y-reduce-motion", s.reduceMotion);
+    html.classList.toggle("a11y-kbd", s.keyboardOnlyNav); // ← agregado (foco potente al activar “Navegación por teclado”)
 
     html.style.setProperty("--text-size", `${s.textScale}rem`);
     html.style.setProperty("--line-height", String(s.lineHeight));
     html.style.setProperty("--letter-spacing", `${s.letterSpacing}em`);
   }, [
     s.darkMode, s.highContrast, s.underlineLinks, s.largeTargets, s.reduceMotion,
-    s.textScale, s.lineHeight, s.letterSpacing
+    s.textScale, s.lineHeight, s.letterSpacing, s.keyboardOnlyNav
   ]);
 
   // Atajos globales

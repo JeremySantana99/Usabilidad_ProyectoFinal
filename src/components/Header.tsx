@@ -8,7 +8,7 @@ export default function Header(){
         <strong>Turismo Accesible</strong>
         <a href="#">Inicio</a>
         <a href="#">Destinos</a>
-        <a href="#">Rutas</a>
+        <a href="#">Gastronomia</a>
         <a href="#">Eventos</a>
         <a href="#">Accesible</a>
       </nav>

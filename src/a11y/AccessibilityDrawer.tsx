@@ -11,7 +11,7 @@ function SectionHeader({ children }: { children: React.ReactNode }) {
 
 export default function AccessibilityDrawer() {
   const s = useA11y();
-  const { speak, cancel } = useTTS();
+  const { speakFullPage, cancel } = useTTS();
   useVoiceCommands();
 
   const Toggle = ({ id, label, desc, value, onChange }:{
@@ -79,8 +79,16 @@ export default function AccessibilityDrawer() {
               <SectionHeader>Asistivas</SectionHeader>
               <Toggle id="tts" label="Lector de texto (TTS)" value={s.ttsEnabled} onChange={v=>s.set("ttsEnabled", v)} desc="Lee en voz alta los contenidos seleccionados." />
               <div className="flex gap-2">
-                <button className="px-3 py-2 rounded bg-gray-200" onClick={()=>s.ttsEnabled ? speak("Bienvenido al menú de accesibilidad. Usa Alt A para abrir y cerrar.") : null} disabled={!s.ttsEnabled}>Probar lectura</button>
-                <button className="px-3 py-2 rounded bg-gray-200" onClick={cancel} disabled={!s.ttsEnabled}>Detener</button>
+                <button
+                  className="px-3 py-2 rounded bg-gray-200"
+                  onClick={() => (s.ttsEnabled ? speakFullPage() : null)}
+                  disabled={!s.ttsEnabled}
+                >
+                  Probar lectura
+                </button>
+                <button className="px-3 py-2 rounded bg-gray-200" onClick={cancel} disabled={!s.ttsEnabled}>
+                  Detener
+                </button>
               </div>
               <Toggle id="voice" label="Comandos de voz" value={s.voiceCommandsEnabled} onChange={v=>s.set("voiceCommandsEnabled", v)} desc='Ejemplos: "modo oscuro", "aumentar texto", "abrir accesibilidad".' />
 
